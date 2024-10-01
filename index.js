@@ -24,5 +24,5 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/announcements', announcementRoutes);
 app.use('/api/students', studentRoutes);
 
-const PORT =  5700;
+const PORT =  3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
