@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
-const { addStudent, getStudent, deleteStudent } = require('../controllers/studentController');
+const { addStudent, getStudents, deleteStudent } = require('../controllers/studentController');
 
 router.post('/', auth, addStudent);
 router.get('/', auth, getStudents);
-router.delete('/:id', async (req, res) => {
+router.delete('/:id',auth, async (req, res) => {
     try {
       const deletedStudent = await deleteStudent(req.params.id);
       res.json({ message: 'Student deleted successfully', student: deletedStudent });
