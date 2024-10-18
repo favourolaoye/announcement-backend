@@ -27,3 +27,29 @@ exports.getStudents = async (req, res) => {
         res.status(500).json({ msg: 'Server error' });
     }
 };
+exports.deleteStudent = async function deleteStudent(id) {
+    try {
+      // Check if the student exists
+      const student = await Student.findById(id);
+      if (!student) {
+        throw new Error('Student not found');
+      }
+  
+      // Delete the student
+      const deletedStudent = await Student.findByIdAndDelete(id);
+  
+      // If the deletion was successful, return the deleted student
+      if (deletedStudent) {
+        return deletedStudent;
+      } else {
+        throw new Error('Failed to delete student');
+      }
+    } catch (error) {
+      // Log the error for server-side debugging
+      console.error('Error in deleteStudent:', error);
+  
+      // Rethrow the error to be handled by the route handler
+      throw error;
+    }
+  }
+  
